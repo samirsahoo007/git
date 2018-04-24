@@ -1,0 +1,73 @@
+$ git clone https://username@xyz-github.systems.region.com/ProjectDir/projectName.git
+$ git branch -a  => You can see the branches highlighted in red. The Head is placed on the master branch which was pulled.
+$ git checkout –b branch_name				e.g. => git checkout –b E2_dev_Samir
+$ git add file1 file2 file3
+$ git add -N newfile				=> How to add a new file and send the diff?
+$ git commit			OR			git commit -m "your commit message"              
+$ git push –u origin branch_name			e.g. => git push -u origin E2_dev_Samir
+
+$ git pull			OR 			git pull origin master => Make repo up to date
+$ git reset --soft HEAD~				=> If you want to undo the last commit                                          
+
+To remove an unwanted file from the last commit
+$ git reset HEAD path/to/unwanted_file
+$ git commit				OR 			git commit -c ORIG_HEAD
+
+To completely delete the file from your local and the remote repository
+$ git rm <file>		=> remove the file
+$ git commit –amend
+
+
+$ git remote -v
+origin	https://github.com/schacon/ticgit (fetch)
+origin	https://github.com/schacon/ticgit (push)
+
+$ git remote add <shortname> <url> 			=> adding remote repositories
+e.g.
+$ git remote
+origin
+$ git remote add pb https://github.com/paulboone/ticgit
+$ git remote -v
+origin	https://github.com/schacon/ticgit (fetch)
+origin	https://github.com/schacon/ticgit (push)
+pb	https://github.com/paulboone/ticgit (fetch)
+pb	https://github.com/paulboone/ticgit (push)
+
+$ git remote show origin
+$ git remote rename pb paul		=> Renaming remote
+$ git remote remove paul		=> Removing remote
+
+git branch -m <old name> <new name>. 
+e.g. git branch -m example title_branch will rename example branch to title_branch.
+
+git branch -d <branch name> – Delete a Branch
+
+git diff <branch name>..<branch name>	-	Comparing Branches
+e.g. git diff master..newbranch
+
+git diff A2/ A2_Peter_changes/A2 | egrep -v '.git|redis-stable|.pyc'
+
+To list file names only:
+e.g. # git diff --name-status A2/ A2_Peter_changes/A2 | egrep -v '.git|redis-stable|.pyc'
+
+# git difftool A2/ A2_Peter_changes/A2/
+git diff –color-words master..newbranch
+
+
+# git clone git clone https://username@xyz-github.systems.region.com/ProjectDir/A2.git
+Initialized empty Git repository in /spare/test/A2/.git/
+Password:
+error:  while accessing https://username@xyz-github.systems.region.com/ProjectDir/A2.git/info/refs
+
+fatal: HTTP request failed
+
+Solution: 
+git config --global http.sslverify false
+
+git reset does know five "modes": soft, mixed, hard, merge and keep. I will discuss the first three, since those are the ones you usually use.
+soft
+When using git reset --soft HEAD~1 you will undo the last commit, but the file changes will stay in your working tree. Also the changes will stay on your index, so following with a git commit will create a commit with the exact same changes as the commit you "removed" before.
+mixed
+This is the default mode and quite similar to soft. When "removing" a commit with git reset HEAD~1 you will still keep the changes in your working tree but not on the index; so if you want to "redo" the commit, you will have to add the changes (git add) before commiting.
+hard
+When using git reset --hard HEAD~1 you will lose the changes introduced in the last commit. The changes won't stay in your working tree so doing a git status command will tell you that you don't have any changes in your repository. Never use this(--hard) option. This is dangerous.
