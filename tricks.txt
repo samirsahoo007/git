@@ -8,6 +8,7 @@ $ git push –u origin branch_name			e.g. => git push -u origin E2_dev_Samir
 
 $ git pull			OR 			git pull origin master => Make repo up to date
 $ git reset --soft HEAD~				=> If you want to undo the last commit                                          
+$ git reset --hard origin/mybranch			=> Need to reset git branch to origin version
 
 To remove an unwanted file from the last commit
 $ git reset HEAD path/to/unwanted_file
