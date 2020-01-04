@@ -92,7 +92,12 @@ hard
 When using git reset --hard HEAD~1 you will lose the changes introduced in the last commit. The changes won't stay in your working tree so doing a git status command will tell you that you don't have any changes in your repository. Never use this(--hard) option. This is dangerous.
 
 Que. How to create a directory and push without checking out existing git directory with huge no of files?
-cd existing_folder
+
+First make the repository (Name=RepositoryName) on github.
+
+On your local linux/unix system:
+
+cd RepositoryName
 git init
 git remote add origin path_to_your_repo.git
 git add .
