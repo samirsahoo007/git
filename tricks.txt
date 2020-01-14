@@ -122,3 +122,5 @@ git pull, in contrast, is used with a different goal in mind: to update your cur
 Since "git pull" tries to merge remote changes with your local ones, a so-called "merge conflict" can occur. Check out our in-depth tutorial on How to deal with merge conflicts for more information.
 Like for many other actions, it's highly recommended to start a "git pull" only with a clean working copy. This means that you should not have any uncommitted local changes before you pull. Use Git's Stash feature to save your local changes temporarily.
 
+*** Git does not care about folders - it cares about files. Therefore, if a folder is empty, Git will not offer you to add it to version control.
+	A popular solution is to simply add a file named ".keep" in the corresponding folder. .keep is just a popular convention.
