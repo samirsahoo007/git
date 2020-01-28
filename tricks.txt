@@ -20,6 +20,24 @@ To completely delete the file from your local and the remote repository
 $ git rm <file>		=> remove the file
 $ git commit –amend
 
+Sync local branch with master:
+git branch --set-upstream-to=origin/master my_branch_x			# git branch --set-upstream-to=origin/xyz_branch my_branch_x	<= To sync with "xyz_branch"
+
+Update the remote branch:
+git push -u origin my_branch_x
+
+
+OR
+
+
+Sync local branch with master:
+
+$ git remote -v 							# Check the remote branch
+origin	https://github.geo.apple.com/maps-eval-assertions/batchx-tests.git (fetch)
+origin	https://github.geo.apple.com/maps-eval-assertions/batchx-tests.git (push)
+
+$ git pull https://github.geo.apple.com/maps-eval-assertions/batchx-tests.git  master
+
 
 $ git remote -v
 origin	https://github.com/schacon/ticgit (fetch)
