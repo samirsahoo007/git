@@ -2,7 +2,7 @@ $ git clone https://username@xyz-github.systems.region.com/ProjectDir/projectNam
 $ git branch -a  => You can see the branches highlighted in red. The Head is placed on the master branch which was pulled.
 $ git checkout –b branch_name				e.g. => git checkout –b E2_dev_Samir
 $ git add file1 file2 file3
-$ git add -N newfile				=> How to add a new file and send the diff?
+$ git add -N newfile					=> How to add a new file and send the diff?
 $ git commit			OR			git commit -m "your commit message"              
 $ git push –u origin branch_name			e.g. => git push -u origin E2_dev_Samir
 
@@ -142,3 +142,9 @@ Like for many other actions, it's highly recommended to start a "git pull" only 
 
 *** Git does not care about folders - it cares about files. Therefore, if a folder is empty, Git will not offer you to add it to version control.
 	A popular solution is to simply add a file named ".keep" in the corresponding folder. .keep is just a popular convention.
+
+
+List remote Git branches and the last commit date for each branch. Sort by most recent commit date.
+$ for branch in `git branch -r | grep -v HEAD`;do echo -e `git show --format="%ci %cr" $branch | head -n 1` \\t$branch; done | sort -r
+
+
