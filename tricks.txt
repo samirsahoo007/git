@@ -147,4 +147,9 @@ Like for many other actions, it's highly recommended to start a "git pull" only 
 List remote Git branches and the last commit date for each branch. Sort by most recent commit date.
 $ for branch in `git branch -r | grep -v HEAD`;do echo -e `git show --format="%ci %cr" $branch | head -n 1` \\t$branch; done | sort -r
 
+Showing Last Month’s Commits
+$ git log --since="last month"
+
+--before and --after which accept dates in the format of YYYY-MM-DD
+$ git log --before={2013-04-01} --after={2013-03-01} --author="`git config user.name`" --pretty=format:"{f915c993dcd57782d8bbdb9f9291c5d4b3b1a7c844f782feb26c4f553a22f754}cd  {f915c993dcd57782d8bbdb9f9291c5d4b3b1a7c844f782feb26c4f553a22f754}h  {f915c993dcd57782d8bbdb9f9291c5d4b3b1a7c844f782feb26c4f553a22f754}s" --date=short
 
