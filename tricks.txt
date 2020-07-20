@@ -65,6 +65,8 @@ git branch -d <branch name> – Delete a Branch
 
 git diff <branch name>..<branch name>	-	Comparing Branches
 e.g. git diff master..newbranch
+e.g. git diff origin/master..origin/my_branch
+$ git diff master...feature -- <file>
 
 git diff A2/ A2_Peter_changes/A2 | egrep -v '.git|redis-stable|.pyc'
 
