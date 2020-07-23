@@ -12,6 +12,13 @@ $ git reset --hard origin/mybranch			=> Need to reset git branch to origin versi
 
 $ git rebase origin/master				=> branch to keep track of master 
 
+Copy a file from one branch to another
+$ git checkout branch2 -- path/to/your/file		# Assuing you're in branch1. Same works for folder as well
+
+OR
+
+$ git show <branch_name>:path/to/file > path/to/local/file
+
 To remove an unwanted file from the last commit
 $ git reset HEAD path/to/unwanted_file
 $ git commit				OR 			git commit -c ORIG_HEAD

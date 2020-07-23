@@ -1,1 +1,164 @@
-# git
+$ git clone https://username@xyz-github.systems.region.com/ProjectDir/projectName.git
+$ git branch -a  => You can see the branches highlighted in red. The Head is placed on the master branch which was pulled.
+$ git checkout –b branch_name				e.g. => git checkout –b E2_dev_Samir
+$ git add file1 file2 file3
+$ git add -N newfile					=> How to add a new file and send the diff?
+$ git commit			OR			git commit -m "your commit message"              
+$ git push –u origin branch_name			e.g. => git push -u origin E2_dev_Samir
+
+$ git pull			OR 			git pull origin master => Make repo up to date
+$ git reset --soft HEAD~				=> If you want to undo the last commit                                          
+$ git reset --hard origin/mybranch			=> Need to reset git branch to origin version
+
+$ git rebase origin/master				=> branch to keep track of master 
+
+Copy a file from one branch to another
+$ git checkout branch2 -- path/to/your/file		# Assuing you're in branch1. Same works for folder as well
+
+OR
+
+$ git show <branch_name>:path/to/file > path/to/local/file
+
+To remove an unwanted file from the last commit
+$ git reset HEAD path/to/unwanted_file
+$ git commit				OR 			git commit -c ORIG_HEAD
+
+To completely delete the file from your local and the remote repository
+$ git rm <file>		=> remove the file
+$ git commit –amend
+
+Sync local branch with master:
+git branch --set-upstream-to=origin/master my_branch_x			# git branch --set-upstream-to=origin/xyz_branch my_branch_x	<= To sync with "xyz_branch"
+
+Update the remote branch:
+git push -u origin my_branch_x
+
+
+OR
+
+
+Sync local branch with master:
+
+$ git remote -v 							# Check the remote branch
+origin	https://github.geo.apple.com/maps-eval-assertions/batchx-tests.git (fetch)
+origin	https://github.geo.apple.com/maps-eval-assertions/batchx-tests.git (push)
+
+$ git pull https://github.geo.apple.com/maps-eval-assertions/batchx-tests.git  master
+
+
+$ git remote -v
+origin	https://github.com/schacon/ticgit (fetch)
+origin	https://github.com/schacon/ticgit (push)
+
+$ git remote add <shortname> <url> 			=> adding remote repositories
+e.g.
+$ git remote
+origin
+$ git remote add pb https://github.com/paulboone/ticgit
+$ git remote -v
+origin	https://github.com/schacon/ticgit (fetch)
+origin	https://github.com/schacon/ticgit (push)
+pb	https://github.com/paulboone/ticgit (fetch)
+pb	https://github.com/paulboone/ticgit (push)
+
+$ git remote show origin
+$ git remote rename pb paul		=> Renaming remote
+$ git remote remove paul		=> Removing remote
+
+git branch -m <old name> <new name>. 
+e.g. git branch -m example title_branch will rename example branch to title_branch.
+
+git branch -d <branch name> – Delete a Branch
+
+git diff <branch name>..<branch name>	-	Comparing Branches
+e.g. git diff master..newbranch
+e.g. git diff origin/master..origin/my_branch
+$ git diff master...feature -- <file>
+
+git diff A2/ A2_Peter_changes/A2 | egrep -v '.git|redis-stable|.pyc'
+
+To list file names only:
+e.g. # git diff --name-status A2/ A2_Peter_changes/A2 | egrep -v '.git|redis-stable|.pyc'
+
+# git difftool A2/ A2_Peter_changes/A2/
+git diff –color-words master..newbranch
+
+
+# git clone git clone https://username@xyz-github.systems.region.com/ProjectDir/A2.git
+Initialized empty Git repository in /spare/test/A2/.git/
+Password:
+error:  while accessing https://username@xyz-github.systems.region.com/ProjectDir/A2.git/info/refs
+
+fatal: HTTP request failed
+
+Solution: 
+git config --global http.sslverify false
+
+Que: How to find out in which commit a particular code was added?
+e.g. I want to find in which commit this line("self.is_param_valid(param,variables)") has been added.
+
+Answer: Command: git log -s SearchString
+
+e.g.
+$ git log -S 'self.is_param_valid(param,variables)' utilities/workflow_util.py        # File name/path is optional
+commit bae0db07222e1f07f043c9bdd83723042ee86df4
+.
+.
+.
+
+$ git show bae0db07222e1f07f043c9bdd83723042ee86df4
+
+			OR
+
+$ git blame file_path
+
+git reset does know five "modes": soft, mixed, hard, merge and keep. I will discuss the first three, since those are the ones you usually use.
+soft
+When using git reset --soft HEAD~1 you will undo the last commit, but the file changes will stay in your working tree. Also the changes will stay on your index, so following with a git commit will create a commit with the exact same changes as the commit you "removed" before.
+mixed
+This is the default mode and quite similar to soft. When "removing" a commit with git reset HEAD~1 you will still keep the changes in your working tree but not on the index; so if you want to "redo" the commit, you will have to add the changes (git add) before commiting.
+hard
+When using git reset --hard HEAD~1 you will lose the changes introduced in the last commit. The changes won't stay in your working tree so doing a git status command will tell you that you don't have any changes in your repository. Never use this(--hard) option. This is dangerous.
+
+Que. How to create a directory and push without checking out existing git directory with huge no of files?
+
+First make the repository (Name=RepositoryName) on github.
+
+On your local linux/unix system:
+
+cd RepositoryName
+git init
+git remote add origin path_to_your_repo.git
+git add .
+git commit
+git push -u origin master
+
+git fetch command, simply choose to retrieve the changes made in the remote repository and store them in your local machine.
+	  However, it does not integrate the changes into your local repository. This keeps you up-to-date with your fellow developers and what they are working on.
+
+git pull command is used to download Git repository changes from a remote repository and merge those changes into your local repository.
+
+$ git fetch origin
+
+git fetch really only downloads new data from a remote repository - but it doesn't integrate any of this new data into your working files. Fetch is great for getting a fresh view on all the things that happened in a remote repository.
+Due to it's "harmless" nature, you can rest assured: fetch will never manipulate, destroy, or screw up anything. This means you can never fetch often enough.
+
+$ git pull origin master
+git pull, in contrast, is used with a different goal in mind: to update your current HEAD branch with the latest changes from the remote server. This means that pull not only downloads new data; it also directly integrates it into your current working copy files. This has a couple of consequences:
+
+Since "git pull" tries to merge remote changes with your local ones, a so-called "merge conflict" can occur. Check out our in-depth tutorial on How to deal with merge conflicts for more information.
+Like for many other actions, it's highly recommended to start a "git pull" only with a clean working copy. This means that you should not have any uncommitted local changes before you pull. Use Git's Stash feature to save your local changes temporarily.
+
+*** Git does not care about folders - it cares about files. Therefore, if a folder is empty, Git will not offer you to add it to version control.
+	A popular solution is to simply add a file named ".keep" in the corresponding folder. .keep is just a popular convention.
+
+
+List remote Git branches and the last commit date for each branch. Sort by most recent commit date.
+$ for branch in `git branch -r | grep -v HEAD`;do echo -e `git show --format="%ci %cr" $branch | head -n 1` \\t$branch; done | sort -r
+
+Showing Last Month’s Commits
+$ git log --since="last month"
+
+--before and --after which accept dates in the format of YYYY-MM-DD
+$ git log --before={2013-04-01} --after={2013-03-01} --author="`git config user.name`" --pretty=format:"{f915c993dcd57782d8bbdb9f9291c5d4b3b1a7c844f782feb26c4f553a22f754}cd  {f915c993dcd57782d8bbdb9f9291c5d4b3b1a7c844f782feb26c4f553a22f754}h  {f915c993dcd57782d8bbdb9f9291c5d4b3b1a7c844f782feb26c4f553a22f754}s" --date=short
+
