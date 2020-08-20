@@ -43,6 +43,8 @@ $ git remote -v 							# Check the remote branch
 origin	https://github.geo.apple.com/maps-eval-assertions/batchx-tests.git (fetch)
 origin	https://github.geo.apple.com/maps-eval-assertions/batchx-tests.git (push)
 
+$ git remote rm origin 							# if you want to delete origin
+
 $ git pull https://github.geo.apple.com/maps-eval-assertions/batchx-tests.git  master
 
 
