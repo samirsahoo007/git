@@ -12,6 +12,22 @@ $ git reset --hard origin/mybranch			=> Need to reset git branch to origin versi
 
 $ git rebase origin/master				=> branch to keep track of master 
 
+# How to take the first commit from the current branch and cherry pick it to all other branches
+cd GITHUB_PROJECT_DIR;
+BRANCHES=("branch1", "branch2", "branch3")
+ORIGINAL_BRANCH=`git status | head -n1 | cut -c11-`
+CHERRY_COMMIT=`git log -n1 | head -n1 | cut -c8-`
+git fetch upstream
+for BRANCH in "${BRANCHES[@]}";
+do
+    git checkout "upstream/$BRANCH";
+    git checkout  -b "${BRANCH}_${ORIGINAL_BRANCH}";
+    git cherry-pick "$CHERRY_COMMIT";
+    git push --set-upstream origin "${BRANCH}_${ORIGINAL_BRANCH}";
+    git checkout "$ORIGINAL_BRANCH";
+done
+
+
 Copy a file from one branch to another
 $ git checkout branch2 path/to/your/file		# Assuing you're in branch1. Same works for folder as well
 
