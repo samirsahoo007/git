@@ -1,7 +1,11 @@
 # git
 
 ### "Help, I keep getting a 'Permission Denied (publickey)' error when I clone/push!" 
-_e.g. **git clone git@github.com:samirsahoo007/Linux.git** fails with permission denied error where as **git clone https://github.com/samirsahoo007/Linux.git** works fine._
+_e.g. 
+**git clone git@github.com:samirsahoo007/Linux.git** 
+fails with permission denied error whereas 
+**git clone https://github.com/samirsahoo007/Linux.git** 
+works fine._
 
 This means, on your local machine, you haven't made any SSH keys. Not to worry. Here's how to fix:
 
