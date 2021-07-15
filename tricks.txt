@@ -180,3 +180,16 @@ $ git log --since="last month"
 --before and --after which accept dates in the format of YYYY-MM-DD
 $ git log --before={2013-04-01} --after={2013-03-01} --author="`git config user.name`" --pretty=format:"{f915c993dcd57782d8bbdb9f9291c5d4b3b1a7c844f782feb26c4f553a22f754}cd  {f915c993dcd57782d8bbdb9f9291c5d4b3b1a7c844f782feb26c4f553a22f754}h  {f915c993dcd57782d8bbdb9f9291c5d4b3b1a7c844f782feb26c4f553a22f754}s" --date=short
 
+
+Q. How to resolve error
+fatal: unknown index entry format 0x16700000
+
+A.
+When your index is broken you can normally delete the index file and reset it.
+
+$ rm -f .git/index
+$ git reset
+
+OR
+
+You clone the repo again.
