@@ -11,6 +11,7 @@ $ git reset --soft HEAD~				=> If you want to undo the last commit
 $ git reset --hard origin/mybranch			=> Need to reset git branch to origin version
 
 $ git rebase origin/master				=> branch to keep track of master 
+git show commit_id --name-only 				=> to list all the committed files that are going to push to the remote repository.
 
 # How to take the first commit from the current branch and cherry pick it to all other branches
 cd GITHUB_PROJECT_DIR;
