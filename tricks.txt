@@ -203,3 +203,8 @@ Ans:
 git clean  -d  -f .
 git pull
 
+Issue: your local changes would be overwritten by merge
+
+Ans: Just BE CAREFUL. The following command removes all the local files.
+git reset --hard
+git pull
