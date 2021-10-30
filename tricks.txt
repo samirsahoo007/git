@@ -194,3 +194,12 @@ $ git reset
 OR
 
 You clone the repo again.
+
+
+Issue: The following untracked working tree files would be overwritten by merge
+You are not able to do "git pull nd it throws the above error
+
+Ans:
+git clean  -d  -f .
+git pull
+
