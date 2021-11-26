@@ -13,6 +13,11 @@ $ git reset --hard origin/mybranch			=> Need to reset git branch to origin versi
 $ git rebase origin/master				=> branch to keep track of master 
 git show commit_id --name-only 				=> to list all the committed files that are going to push to the remote repository.
 
+Cherry-pick:
+checkout (switch to) target branch.
+git cherry-pick <commit id>                             Here commit id is activity id of another branch.Eg. git cherry-pick 9772dd546a3609b06f84b680340fb84c5463264f
+push to target branch
+
 # How to take the first commit from the current branch and cherry pick it to all other branches
 cd GITHUB_PROJECT_DIR;
 BRANCHES=("branch1", "branch2", "branch3")
