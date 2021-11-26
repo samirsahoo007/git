@@ -126,8 +126,18 @@ iOdds are, when nearing the completion of a feature in a feature branch, the com
 
 More??? Ref here: https://medium.com/osedea/git-rebase-powerful-command-507bbac4a234
 
+## cherry-pick
+Cherry picking is the act of picking a commit from a branch and applying it to another.
 
+### Short example of situation, when you need cherry pick
 
+Consider following scenario. You have two branches.
+
+a) release1 - This branch is going to your customer, but there are still some bugs to be fixed.
+
+b) master - Classic master branch, where you can for example add functionality for release2.
+
+NOW: You fix something in release1. Of course you need this fix also in master. And that is a typical use-case for cherry picking. So cherry pick in this scenario means that you take a commit from release1 branch and include it into the master branch.
 
 
 
