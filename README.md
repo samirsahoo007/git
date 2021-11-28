@@ -139,6 +139,13 @@ b) master - Classic master branch, where you can for example add functionality f
 
 NOW: You fix something in release1. Of course you need this fix also in master. And that is a typical use-case for cherry picking. So cherry pick in this scenario means that you take a commit from release1 branch and include it into the master branch.
 
+## What does Git (master|REBASE 1/1) mean? How do I get rid of it?
 
+You are stuck in the middle of a rebase.
 
+If you have merged/solved conflicts for all the paths:
+use git add . to commit resolved items.
+use git rebase --continue to complete the process.
+
+Or use git rebase --abort to exit the rebase process without any risk.
 
