@@ -149,3 +149,37 @@ use git rebase --continue to complete the process.
 
 Or use git rebase --abort to exit the rebase process without any risk.
 
+# Removing file from previous commit
+In order to remove some files from a Git commit, use the “git reset” command with the “–soft” option and specify the commit before HEAD.
+
+```
+$ git reset --soft HEAD~1
+```
+When running this command, you will be presented with the files from the most recent commit (HEAD) and you will be able to commit them.
+
+Now that your files are in the staging area, you can remove them (or unstage them) using the “git reset” command again.
+
+```
+$ git reset HEAD <file>
+```
+Note : this time, you are resetting from HEAD as you simply want to exclude files from your staging area
+
+If you are simply not interested in this file anymore, you can use the “git rm” command in order to delete the file from the index (also called the staging area).
+
+```
+$ git rm --cached <file>
+```
+When you are done with the modifications, you can simply commit your changes again with the “–amend” option.
+
+```
+$ git commit --amend
+```
+To verify that the files were correctly removed from the repository, you can run the “git ls-files” command and check that the file does not appear in the file (if it was a new one of course)
+
+```
+$ git ls-files
+
+<file1>
+<file2>
+```
+
