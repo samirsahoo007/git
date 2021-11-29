@@ -183,3 +183,8 @@ $ git ls-files
 <file2>
 ```
 
+You can even re-use the same commit message:
+```
+git commit -c ORIG_HEAD
+```
+
