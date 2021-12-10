@@ -18,6 +18,8 @@ checkout (switch to) target branch.
 git cherry-pick <commit id>                             Here commit id is activity id of another branch.Eg. git cherry-pick 9772dd546a3609b06f84b680340fb84c5463264f
 push to target branch
 
+$git ls-files -o  --exclude-standard			=> list new files only(added by you locally)
+
 # How to take the first commit from the current branch and cherry pick it to all other branches
 cd GITHUB_PROJECT_DIR;
 BRANCHES=("branch1", "branch2", "branch3")
