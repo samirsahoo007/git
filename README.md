@@ -205,3 +205,6 @@ You can even re-use the same commit message:
 git commit -c ORIG_HEAD
 ```
 
+# Squashing a commit
+
+Squashing allows you to combine multiple commits in your branch's history into a single commit. This can help keep your repository's history more readable and understandable.
