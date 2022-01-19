@@ -137,7 +137,24 @@ a) release1 - This branch is going to your customer, but there are still some bu
 
 b) master - Classic master branch, where you can for example add functionality for release2.
 
+c) Team Collaboration - Suppose two of your team members are working on different parts of a bigger feature. One team member has created a common utility function/block of code which the other member also needs. The other team member can cherry-pick the commit where the code is present. This would allow the other team member to continue without “re-inventing the wheel”.
+
+d) Bug Hotfixes - When a bug is discovered it is important to deliver a fix to end-users as quickly as possible. Let’s say your QA team finds a pre-existing bug that needs to be resolved ASAP. You are working on a feature branch and want to address this bug fix in your branch because it is related to the module you are working on. You can make an explicit commit that addresses the hotfix and then cherry-picks the commit directly to master.
+
+e) Undoing changes and restoring lost commits - Sometimes a feature branch may go stale and not get merged into master. Sometimes a pull request might get closed without merging. Git never loses those commits and through commands like git log and git reflog they can be found and cherry-picked back to life.
+
 NOW: You fix something in release1. Of course you need this fix also in master. And that is a typical use-case for cherry picking. So cherry pick in this scenario means that you take a commit from release1 branch and include it into the master branch.
+
+### The steps to achieve this are as follows:
+
+```
+1. git checkout <name of branch you’d like to grab commit from>
+2. git reflog                                     => If you don't know the commit; then use this command to figure out the commitid you want to cherry-pick to
+3. git checkout <name of branch you would like to add commit to>
+4. git cherry-pick <commit hash>             => Use the -x flag with <commit hash> when you are cherry-picking from a public branch otherwise do not use
+5. git push origin <name of branch you would like to add commit to>
+6. Create a PR with the base branch as master, merge it and you’re done.
+```
 
 ## What does Git (master|REBASE 1/1) mean? How do I get rid of it?
 
