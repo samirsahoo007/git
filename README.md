@@ -1,5 +1,22 @@
 # git
 
+### Problem: SSL certificate problem: Unable to get local issuer certificate
+#### Cause
+This error occurs when a self-signed certificate cannot be verified. 
+
+#### Workaround
+Tell git to not perform the validation of the certificate using the global option:
+
+```
+git config --global http.sslBackend schannel
+
+Or,
+
+git config --global http.sslVerify false
+```
+**(warning) Please be advised disabling SSL verification globally might be considered a security risk and should be implemented only temporarily
+**
+
 ### "Help, I keep getting a 'Permission Denied (publickey)' error when I clone/push!" 
 _e.g. 
 **git clone git@github.com:samirsahoo007/Linux.git** 
