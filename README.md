@@ -225,3 +225,11 @@ git commit -c ORIG_HEAD
 # Squashing a commit
 
 Squashing allows you to combine multiple commits in your branch's history into a single commit. This can help keep your repository's history more readable and understandable.
+
+# git switch
+
+The new 'experimental' **git switch branch** command is meant to provide a better interface by having a clear separation, which helps to alleviate the developers’ confusion when using git checkout.
+One such example is **git checkout <filename>** which reverses the modifications of an unstaged file and **git checkout <branchname>** which switches branch.The dilemma is more when the filename and branchname are the same.
+          
+The new commands, **git restore** (takes care of operations that change file), and the **git switch** (takes care of operations that change branches) shares out the responsibilities of git checkout in a more intuitive way.
+          
