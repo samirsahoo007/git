@@ -232,4 +232,13 @@ The new 'experimental' **git switch branch** command is meant to provide a bette
 One such example is **git checkout <filename>** which reverses the modifications of an unstaged file and **git checkout <branchname>** which switches branch.The dilemma is more when the filename and branchname are the same.
           
 The new commands, **git restore** (takes care of operations that change file), and the **git switch** (takes care of operations that change branches) shares out the responsibilities of git checkout in a more intuitive way.
+   
+# Create pull request using GitHub CLI
+## gh pr create
           
+```
+$ gh pr create --title "The bug is fixed" --body "Everything works again"
+$ gh pr create --reviewer monalisa,hubot  --reviewer myorg/team-name
+$ gh pr create --project "Roadmap"
+$ gh pr create --base develop --head monalisa:feature
+```
