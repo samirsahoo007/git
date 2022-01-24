@@ -242,3 +242,10 @@ $ gh pr create --reviewer monalisa,hubot  --reviewer myorg/team-name
 $ gh pr create --project "Roadmap"
 $ gh pr create --base develop --head monalisa:feature
 ```
+
+```
+# Create a pull request using flags
+~/Projects/my-project$ gh pr create --title "Pull request title" --body "Pull request body"
+http://github.com/owner/repo/pull/1
+~/Projects/my-project$
+```
