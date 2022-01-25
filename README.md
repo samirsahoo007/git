@@ -249,3 +249,24 @@ $ gh pr create --base develop --head monalisa:feature
 http://github.com/owner/repo/pull/1
 ~/Projects/my-project$
 ```
+
+          
+## Problem: GitHub: Clone succeeded, but checkout failed        
+Ans: This is due to very long file name or semicolon in the file name. It can be solved either of below command.
+```
+          git config --system core.longpaths true
+          
+          OR
+          
+          git config --global core.longpaths true
+```
+         
+          If the above doesn't work then use the following step:
+          
+If you are on windows, you should do:
+
+Go to Computer Configuration → Administrative Templates → System → Filesystem in gpedit.msc , open Enable Win32 long paths and set it to Enabled.
+
+After that git config --system core.longpaths true or edit gitconfig (you must run as administrator).
+
+Open project directory with git bash and run git reset after that run git checkout *
