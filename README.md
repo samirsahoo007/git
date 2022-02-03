@@ -270,3 +270,12 @@ Go to Computer Configuration → Administrative Templates → System → Filesys
 After that git config --system core.longpaths true or edit gitconfig (you must run as administrator).
 
 Open project directory with git bash and run git reset after that run git checkout *
+
+## Git — you may want to set your merge.renamelimit variable to at least 1608 and retry the command.
+```Auto-merging trunk/.config
+CONFLICT (content): Merge conflict in trunk/.config
+warning: inexact rename detection was skipped due to too many files.
+warning: you may want to set your merge.renamelimit variable to at least 1608 and retry the command.
+Automatic merge failed; fix conflicts and then commit the result.```
+
+git config merge.renameLimit 99999
