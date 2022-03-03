@@ -279,3 +279,31 @@ warning: you may want to set your merge.renamelimit variable to at least 1608 an
 Automatic merge failed; fix conflicts and then commit the result.```
 
 git config merge.renameLimit 99999
+          
+          
+### [GIT] Fix error: RPC failed; curl 18 transfer closed with outstanding read data remaining
+git config --global http.postBuffer 524288000
+
+
+git clone http://github.com/large-repository --depth 1
+cd large-repository
+git fetch --unshallow
+
+
+On Linux
+Execute the following in the command line before executing the Git command:
+
+export GIT_TRACE_PACKET=1
+export GIT_TRACE=1
+export GIT_CURL_VERBOSE=1
+On Windows
+Execute the following in the command line before executing the Git command:
+
+set GIT_TRACE_PACKET=1
+set GIT_TRACE=1
+set GIT_CURL_VERBOSE=1
+
+
+Disable the default 1GB limit of proxy_max_temp_file_size for Nginx. Value need to be set as zero to disable it
+You can find more details here http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_max_temp_file_size . 
+          
