@@ -1,5 +1,14 @@
 # git
 
+## Git Squash and remove previous commits
+
+git rebase -i HEAD~10
+### Retain the first commit from below( as pick) and change the rest of the `pick` to `squash`
+### After your rebase is successful
+git log
+### You can see all your commits squashes to one commit
+
+
 ### Problem: SSL certificate problem: Unable to get local issuer certificate
 #### Cause
 This error occurs when a self-signed certificate cannot be verified. 
