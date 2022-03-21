@@ -316,3 +316,111 @@ set GIT_CURL_VERBOSE=1
 Disable the default 1GB limit of proxy_max_temp_file_size for Nginx. Value need to be set as zero to disable it
 You can find more details here http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_max_temp_file_size . 
           
+# Improving GIT Performance
+
+You can improve git performance by doing the following:
+
+> Limit the number of commits you have in a branch. You can squash commits or use an interactive rebase in which you add -s for each commit except the first one. By doing this you shall have one commit in a branch.
+
+> Delete unused branches, also when merging a pull request, make sure you delete the branch afterward
+
+> Truncate git history if commits earlier than a certain date are not needed, this will reduce clone repository time as less commits are fetched
+          
+          
+# What is git rebase?
+
+“Rebasing is the process of moving or combining a sequence of commits to a new base commit. Rebasing is most useful and easily visualized in the context of a feature branching workflow. "
+          
+# What does squashing commits mean?
+By squashing commits if you have multiple commits in your branch you can combine them into one commit. This can easily be achieved by performing an interactive rebase. 
+Let’s see how:
+
+**Rebase to the rescue**
+
+In order to sync your branch with the target branch you can get the latest version of the target branch from the server by doing a ‘git pull’ on that branch, then move to your branch and perform an interactive rebase.
+
+If you are not interested in updating your local target branch you can achieve what is mentioned above in a single command (assuming that master is the target branch):
+
+git pull origin master --rebase=interactive
+
+It is important to understand that each time you perform a rebase the ids of the commits will be modified, so If you work with a couple of people on the same branch it is not recommended to use rebase as you will end up with commits with different ids but the same changes that will lead to potentially hard to solve merge conflicts.
+
+If your work is located in a test-branch (the branch you will later merge in the target branch) and you want to rebase it with the latest version of master branch (the target branch), and also update your local master branch, you can execute the following commands:
+
+```
+git checkout master
+git pull origin master
+git checkout test-branch
+git rebase -i master
+```
+          
+This will open your text editor in which you can squash the commits:
+```
+pick f07702e First commit message.
+s f58822dd Second commit message.
+s 4709c5b Third commit message.
+```
+          
+The result of this operation is one commit, you can customize its message, by default it is a concatenation of the messages from the three commits.
+
+By executing the following command, you will notice that your commit is on top of the latest commit from master:
+```
+git log --oneline
+```
+After working with rebase instead of doing a git pull command to sync a branch with the target branch, there has been a noticeable improvement in git performance. More importantly the developers working on the same project started to get familiar with rebase and use it in day to day work. With our combined effort and by deleting unused branches we made our daily work easier as git commands were executed in a matter of seconds, instead of minutes.
+
+Just keep one thing in mind while using rebase: the rebase command alters git history by changing the ids of the rebased commits, while this is ok for a local branch, for a branch that is pushed to a remote doing a rebase might lead in merge conflicts if other people are working on the branch. In this case it is recommended to do a rebase and squashing commits for the branch just before merge, when you know the work on that branch is completed.
+
+**Delete unused branches**
+When working with git, depending on the git workflow you use, there are one or more branches that have to be present on the git server. For example, if all the latest work is merged in the master branch, the master branch is present. If there are release branches that are created from master, then it is expected that release branches are present in git server as well.
+
+These are examples of branches you expect to find in the git server. But how about branches that are no longer used and are present in the git server? Maybe branches for feature work or bug fixes that did not get deleted when their corresponding pull requests got merged. Or just branches that did not get merged at all in master as the pull requests for them got declined, for example.
+
+The unused branches have a negative impact on overall git server performance. It was a team effort performed by the teams working on the project to determine all unused branches and to delete them. Let’s see how this was performed!
+
+First sync your local git repo with the remote one:
+```
+git fetch --prune origin
+```
+Make sure you can run git in PowerShell, you only need to configure the PATH environment variable as described here https://thepracticalsysadmin.com/setting-up-git-in-windows/
+
+Use the following PowerShell and bash scripts to get all merged and not merged branches and delete them: https://github.com/alinruscior/git-scripts/
+
+If you are interested in getting all branches that contain a certain text in their name, let’s say ‘test’ you can use the ‘grep’ operator for searching:
+```
+git branch --remotes --no-merged master | grep "test"
+```
+A helpful script that gets all the merged and not merged branches in the ‘master’ branch together with details: last commit hash, date of last commit, author of last commit and writes the data in a csv (branches.csv) can be found here: https://github.com/alinruscior/git-scripts/blob/master/powershell/ExportLastCommitDetailsForAllBranches.ps
+
+Bash script: https://github.com/alinruscior/git-scripts/blob/master/bash/ExportLastCommitDetailsForAllBranches.sh
+
+Sample generated csv:
+
+
+
+Truncate git history
+We can reduce the number of commits in git by truncating the git history. In order to achieve this, we start a new branch from a certain commit and rebase the target branch in order to remove unwanted commits.
+
+It’s worth mentioning that the file history will be altered by this process, meaning that in the first commit of the new truncated branch all files will be marked as created.
+
+We can use the following command in order to export all the commits we have in a branch:
+
+git log --format="%h %ai %an %s" --output=commits.txt
+
+The commit hash, commit date, author, and commit message are displayed for each commit in the ‘commits.txt’ file. This can help you decide what is a good candidate for a starting commit in a new branch with truncated history.
+
+The commands we could run are these:
+
+git checkout --orphan temp $1 # create a new branch without parent history
+
+ 
+
+git commit -m "Truncated history" # create a first commit on this branch
+
+ 
+
+git rebase --onto temp $1 master -i # now rebase the part of master branch that we want to keep onto this branch 
+
+ 
+
+git branch -D temp # delete the temp branch
