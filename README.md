@@ -3,11 +3,18 @@
 ## Git Squash and remove previous commits
 
 git rebase -i HEAD~10
-### Retain the first commit from below( as pick) and change the rest of the `pick` to `squash`
-### After your rebase is successful
-git log
-### You can see all your commits squashes to one commit
 
+Retain the first commit from below( as pick) and change the rest of the `pick` to `squash`.
+Check the comments, which one you want to keep and which one to remove. Save the file
+After your rebase is successful
+
+git log
+
+You can see all your commits squashes to one commit
+
+git push -u origin branch_name --force
+
+Do a force push
 
 ### Problem: SSL certificate problem: Unable to get local issuer certificate
 #### Cause
