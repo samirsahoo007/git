@@ -189,6 +189,11 @@ $ git log --since="last month"
 --before and --after which accept dates in the format of YYYY-MM-DD
 $ git log --before={2013-04-01} --after={2013-03-01} --author="`git config user.name`" --pretty=format:"{f915c993dcd57782d8bbdb9f9291c5d4b3b1a7c844f782feb26c4f553a22f754}cd  {f915c993dcd57782d8bbdb9f9291c5d4b3b1a7c844f782feb26c4f553a22f754}h  {f915c993dcd57782d8bbdb9f9291c5d4b3b1a7c844f782feb26c4f553a22f754}s" --date=short
 
+Q. How to clone large repo with very large files?
+$ git clone http://<my_url_prefix>/my_repo.git --depth 1 --branch my_branch
+$ cd my_repo
+$ git fetch --unshallow
+$ git pull -p                        or                      git pull --all
 
 Q. How to resolve error
 fatal: unknown index entry format 0x16700000
