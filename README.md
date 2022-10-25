@@ -431,3 +431,23 @@ git rebase --onto temp $1 master -i # now rebase the part of master branch that 
  
 
 git branch -D temp # delete the temp branch
+
+
+## How to solve the following error?
+$ git clone http://<my_url_prefix>/my_repo.git
+Cloning into 'my_repo'...
+remote: fatal: corrupt tree file
+error: git upload-pack: git-pack-objects died with error.
+remote: aborting due to possible repository corruption on the remote side.
+fatal: early EOF
+fatal: git upload-pack: aborting due to possible repository corruption on the remote side.
+fatal: index-pack failed
+
+### Solution
+The error is possibly due to large repo or very large file in the repo. We can do the cloning as below.
+```
+$ git clone http://<my_url_prefix>/my_repo.git --depth 1 --branch my_branch
+$ cd my_repo
+$ git fetch --unshallow
+$ git pull -p                        or                      git pull --all
+```
