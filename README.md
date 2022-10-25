@@ -445,9 +445,9 @@ fatal: index-pack failed
 
 ### Solution
 The error is possibly due to large repo or very large file in the repo. We can do the cloning as below.
-```
+
 $ git clone http://<my_url_prefix>/my_repo.git --depth 1 --branch my_branch
 $ cd my_repo
 $ git fetch --unshallow
 $ git pull -p                        or                      git pull --all
-```
+
