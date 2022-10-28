@@ -451,3 +451,31 @@ $ cd my_repo
 $ git fetch --unshallow
 $ git pull -p                        or                      git pull --all
 
+## git "shallow clone + unshallow" vs "normal clone"
+Considering the below two commands
+1. 
+git clone <url> --depth 1
+git fetch --unshallow
+and
+
+2. 
+git clone <url>
+          
+### Ans:
+When you clone a very large repository, you need to transfer a lot of data. Depending on your network speeds, this may take a lot of time. To put in a few concrete numbers, let's use 10 GiB as the overall repository data-transfer size (data-transfer size and on-disk size will differ, though usually not by very much) and assume that you can get a transfer rate of 1 MiB/s. That means the data transfer takes 10240 MiB / (1 MiB/s) = 10240 s = 170.667 minutes = a bit under 3 hours (about 2 hours and 50 minutes).
+
+The various protocols in use have error detection and (at the hardware level, often) correction built in, but there's still some chance the connection will fail during this period. If the connection does fail, git clone treats the whole thing as atomic: none of it worked, so Git will remove the entire clone.
+
+If fetching with --depth 1 causes the initial clone to copy only, say, about 1/3 of the overall data, we drop our clone time to about 1 hour, dropping the risk of total failure as well. One can then incrementally add to the shallow clone (with --deepen or larger --depth numbers to git fetch). Each of these have their own risk of failure, but failure just results in adding no objects: the existing clone is unharmed. Retrying an hour's transfer as needed is less painful than restarting the entire 3-hour transfer only to have it fail 2 hours and 20 minutes in.1
+
+Eventually, the final --unshallow gets you everything you would have gotten, had you been able to do a full clone all at once without error. Note that you may want to use --no-single-branch during the initial shallow clone, or fix up the fetch refspec after the initial shallow clone.
+
+Is the final output of the clone the same for both?
+
+The answer to this is both no and yes. We need to define what, precisely, we mean by "final output". In terms of useful access to all the commits and other objects, though, the results are the same (provided you undo the single-branch effect of the --depth argument).
+
+If so, how is it that the second command works much faster than the first for a very large repo?
+
+It doesn't necessarily work any faster. However, when doing a full clone, Git can—not necessarily does, but can—just send an existing pack file, rather than building a new one. This can save CPU time on the sending side. If the (single) pack file on the sender is well-constructed, the resulting single pack file on the receiver is also well-constructed. The result of doing repeated deepening with a shallow clone, or even a single unshallow, will normally be multiple pack files on the receiver; these may not be as well-constructed.
+
+1I speak from actual experience here. :-) Transfer rates are higher now than they were over flaky DSL wiring in 2005, but repositories are larger now too. And, even now, the US has terrible internet infrastructure in some locations.
