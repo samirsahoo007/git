@@ -4,6 +4,7 @@
 
 `
 $ git rebase -i HEAD~10  
+
 $ git push -u origin branch_name --force
 `
 
