@@ -2,19 +2,22 @@
 
 ## Git Squash and remove previous commits
 
-git rebase -i HEAD~10
+$ git rebase -i HEAD~10      # Retain the first commit from below( as pick) and change the rest of the `pick` to `squash`. 
+                             # Save the file. Now you can check which comment to keep. Here 10 shows last 10 commits in the local branch
 
-Retain the first commit from below( as pick) and change the rest of the `pick` to `squash`.
-Check the comments, which one you want to keep and which one to remove. Save the file
-After your rebase is successful
+$ git push -u origin branch_name --force          # force push is necessary
 
-git log
 
-You can see all your commits squashes to one commit
+_git log             # You can see all your commits squashes to one commit_
 
-git push -u origin branch_name --force
+## How to remove/Undo a Commit from your PR
+Suppose you've unwanted commit(pushed by mistake) with a large number of files and you want to remove that...
 
-Do a force push
+$ git rebase -i HEAD~n        #n stands for number of commits you need to view
+                              # Replace pick with dropto “drop” the commit. 
+                              # Don't touch anything else unless you feel highly daring at the time. Delete a commit by deleting that particular line.
+
+$ git push -u origin branch_name --force          # force push is necessary
 
 ### Problem: SSL certificate problem: Unable to get local issuer certificate
 #### Cause
