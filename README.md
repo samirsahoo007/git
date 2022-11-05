@@ -25,7 +25,8 @@ Suppose you've unwanted commit(pushed by mistake) with a large number of files a
 _#first command: n stands for number of commits you need to view
  Replace pick with dropto “drop” the commit. 
  Don't touch anything else unless you feel highly daring at the time. Delete a commit by deleting that particular line.
-_#second command: force push is necessary_
+
+#second command: force push is necessary_
 
 ### Problem: SSL certificate problem: Unable to get local issuer certificate
 #### Cause
