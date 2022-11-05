@@ -28,6 +28,16 @@ _#first command: n stands for number of commits you need to view
 
 #second command: force push is necessary_
 
+## Filter git log to show only my changes
+
+You can filter the log by the author for example, so you can filter by your name :
+
+git log --author="YourName"
+
+or by committer :
+
+git log --committer="YourName"
+ 
 ### Problem: SSL certificate problem: Unable to get local issuer certificate
 #### Cause
 This error occurs when a self-signed certificate cannot be verified. 
