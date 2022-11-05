@@ -2,7 +2,8 @@
 
 ## Git Squash and remove previous commits
 
-`$ git rebase -i HEAD~10  \n$ git push -u origin branch_name --force`
+`$ git rebase -i HEAD~10` 
+`$ git push -u origin branch_name --force`
 
 _#first command above: 
 Retain the first commit from below( as pick) and change the rest of the `pick` to `squash`. 
