@@ -3,6 +3,7 @@
 ## Git Squash and remove previous commits
 
 `$ git rebase -i HEAD~10` 
+
 `$ git push -u origin branch_name --force`
 
 _#first command above: 
