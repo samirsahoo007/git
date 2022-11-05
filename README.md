@@ -2,10 +2,16 @@
 
 ## Git Squash and remove previous commits
 
-`$ git rebase -i HEAD~10      _# Retain the first commit from below( as pick) and change the rest of the `pick` to `squash`. 
-                             # Save the file. Now you can check which comment to keep. Here 10 shows last 10 commits in the local branch_
+`
+$ git rebase -i HEAD~10  
+$ git push -u origin branch_name --force
+`
 
-$ git push -u origin branch_name --force          # force push is necessary`
+_#first command above: 
+Retain the first commit from below( as pick) and change the rest of the `pick` to `squash`. 
+Save the file. Now you can check which comment to keep. Here 10 shows last 10 commits in the local branch_
+
+_#second command: force push is necessary_
 
 
 _git log             # You can see all your commits squashes to one commit_
