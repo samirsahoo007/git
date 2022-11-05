@@ -13,16 +13,19 @@ Save the file. Now you can check which comment to keep. Here 10 shows last 10 co
 _#second command: force push is necessary_
 
 
-_git log             # You can see all your commits squashes to one commit_
+`_git log`             # You can see all your commits squashes to one commit_
 
 ## How to remove/Undo a Commit from your PR
 Suppose you've unwanted commit(pushed by mistake) with a large number of files and you want to remove that...
 
-$ git rebase -i HEAD~n        #n stands for number of commits you need to view
-                              # Replace pick with dropto “drop” the commit. 
-                              # Don't touch anything else unless you feel highly daring at the time. Delete a commit by deleting that particular line.
+`$ git rebase -i HEAD~n`
 
-$ git push -u origin branch_name --force          # force push is necessary
+`git push -u origin branch_name --force`
+
+_#first command: n stands for number of commits you need to view
+ Replace pick with dropto “drop” the commit. 
+ Don't touch anything else unless you feel highly daring at the time. Delete a commit by deleting that particular line.
+_#second command: force push is necessary_
 
 ### Problem: SSL certificate problem: Unable to get local issuer certificate
 #### Cause
