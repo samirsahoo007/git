@@ -3,7 +3,9 @@ $ git branch -a  => You can see the branches highlighted in red. The Head is pl
 $ git checkout –b branch_name				e.g. => git checkout –b E2_dev_Samir
 $ git add file1 file2 file3
 $ git add -N newfile					=> How to add a new file and send the diff?
-$ git commit			OR			git commit -m "your commit message"              
+$ git commit			OR			git commit -m "your commit message"     
+$ git commit -m "your commit message" --no-verify       => Avoid auto verification(e.g. formatting) while git commit. E.g. recently I added a local change to a pull request. Later I realised that, it's not needed. So I reverted my local change and commit and pushed again. Ideally, the file should have been removed from the PR; but it didn't. It remain there with all the formatting changes and was showing in the diff. I tried to copy the same file from another repository and pushed the changes; but there was no change, it remained there. It worked when I passed --no-verify option with the git commit and then pushed.
+
 $ git push –u origin branch_name			e.g. => git push -u origin E2_dev_Samir
 
 $ git pull			OR 			git pull origin master => Make repo up to date
