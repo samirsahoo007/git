@@ -48,6 +48,10 @@ OR
 
 $ git show <branch_name>:path/to/file > path/to/local/file
 
+Remove Files From Git Commit
+$ git rm --cached <file>
+$ git commit --amend
+
 To remove an unwanted file from the last commit
 $ git reset HEAD path/to/unwanted_file
 $ git commit				OR 			git commit -c ORIG_HEAD
