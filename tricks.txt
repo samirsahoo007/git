@@ -46,6 +46,10 @@ $ git checkout branch2 path/to/your/file		# Assuing you're in branch1. Same work
 
 OR
 
+$ git checkout <other-branch-name> -- path/to/your/file
+
+OR
+
 $ git show <branch_name>:path/to/file > path/to/local/file
 
 Remove Files From Git Commit
